@@ -2,8 +2,8 @@ pipeline {
     agent any  // Use any available agent
 
     tools {
-        gradle 'Gradle 7.6'  // Ensure this matches the name of the Gradle installation in Jenkins
         jdk 'JDK 17'  // Ensure this matches the JDK configured in Jenkins
+        // No need to specify gradle tool if you're using the wrapper
     }
 
     stages {
