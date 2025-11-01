@@ -4,7 +4,7 @@ pipeline {
     tools {
         // Ensure this matches the name of the Gradle installation in Jenkins
         gradle 'Gradle'  
-        jdk 'JDK'  // Ensure this matches the JDK configured in Jenkins
+        jdk 'JDK 17'  // Ensure this matches the JDK configured in Jenkins
     }
 
     stages {
