@@ -2,8 +2,7 @@ pipeline {
     agent any  // Use any available agent
 
     tools {
-        // Ensure this matches the name of the Gradle installation in Jenkins
-        gradle 'Gradle'  
+        gradle 'Gradle 7.6'  // Ensure this matches the name of the Gradle installation in Jenkins
         jdk 'JDK 17'  // Ensure this matches the JDK configured in Jenkins
     }
 
@@ -14,7 +13,6 @@ pipeline {
             }
         }
 
-        // Added this stage to check Gradle version
         stage('Verify Gradle Version') {
             steps {
                 echo 'Verifying Gradle version...'
@@ -22,7 +20,6 @@ pipeline {
             }
         }
 
-        // Added this stage to check Java version
         stage('Verify Java Version') {
             steps {
                 echo 'Verifying Java version...'
@@ -33,14 +30,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the Gradle project...'
-                sh './gradlew clean build'  // Run Gradle build instead of Maven
+                sh './gradlew clean build'  // Run Gradle build using the wrapper
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh './gradlew test'  // Run tests with Gradle
+                sh './gradlew test'  // Run tests with Gradle using the wrapper
             }
         }
 
