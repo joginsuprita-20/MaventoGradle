@@ -14,6 +14,22 @@ pipeline {
             }
         }
 
+        // Added this stage to check Gradle version
+        stage('Verify Gradle Version') {
+            steps {
+                echo 'Verifying Gradle version...'
+                sh './gradlew --version'  // This will print the Gradle version being used during the build
+            }
+        }
+
+        // Added this stage to check Java version
+        stage('Verify Java Version') {
+            steps {
+                echo 'Verifying Java version...'
+                sh 'java -version'  // This will print the Java version used during the build
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Building the Gradle project...'
@@ -45,4 +61,3 @@ pipeline {
         }
     }
 }
-
