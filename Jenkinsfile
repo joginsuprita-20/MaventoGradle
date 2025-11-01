@@ -2,46 +2,47 @@ pipeline {
     agent any  // Use any available agent
 
     tools {
-        maven 'Maven'  // Ensure this matches the name configured in Jenkins
+        // Ensure this matches the name of the Gradle installation in Jenkins
+        gradle 'Gradle'  
+        jdk 'JDK'  // Ensure this matches the JDK configured in Jenkins
     }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/joginsuprita-20/MaventoGradle.git'
+                git branch: 'master', url: 'https://github.com/Hemavathipcse/GradleJenkinsPipeline.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'  // Run Maven build
+                echo 'Building the Gradle project...'
+                sh './gradlew clean build'  // Run Gradle build instead of Maven
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'  // Run unit tests
+                echo 'Running tests...'
+                sh './gradlew test'  // Run tests with Gradle
             }
         }
 
-        
-        
-       
         stage('Run Application') {
             steps {
-                // Start the JAR application
-                sh 'java -jar target/MyMavenJenkinsPipeline-1.0-SNAPSHOT.jar'
+                echo 'Running the generated jar file...'
+                sh 'java -jar build/libs/MyMavenToGradle-1.0-SNAPSHOT.jar'  // Run the Gradle JAR
             }
         }
-
-        
     }
 
     post {
         success {
-            echo 'Build and deployment successful!'
+            echo '✅ Build and deployment successful!'
         }
         failure {
-            echo 'Build failed!'
+            echo '❌ Build failed!'
         }
     }
 }
+
